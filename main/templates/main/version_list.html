@@ -1,0 +1,66 @@
+{% extends 'main/base.html'%}
+{% load static %}
+{% load my_tags %}
+{% block content %}
+
+
+<div class="row text-right">
+    <div class="col-12">
+
+        <div class="card mb-3 box-shadow">
+            <div class="card-body">
+                <a class="btn btn-primary" href="{% url 'main:version_create' %}" role="button">Создать версию
+                    продукта</a>
+                <br><br>
+
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Номер версии</th>
+                        <th scope="col">Название</th>
+                        <th scope="col">Продукт</th>
+                        <th scope="col">Актуальность</th>
+                        <th scope="col">info btn</th>
+                        <th scope="col">change btn</th>
+                        <th scope="col">del btn</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% load my_tags %}
+
+
+                    {% for object in object_list %}
+
+                    <tr>
+                        <td>{{ object.number }}</td>
+                        <td>{{ object.name }}</td>
+                        <td>{{ object.product}}</td>
+                        <td>{{ object.sign }}</td>
+                        <td><a class="btn btn-primary" href="{% url 'main:version_detail' object.pk%}"
+                               role="button">Посмотреть</a></td>
+
+                        <td><a class="btn btn-primary" href="{% url 'main:version_update' object.pk%}" role="button">Изменить</a>
+                        </td>
+                        <td><a class="btn btn-primary" href="{% url 'main:version_delete' object.pk%}" role="button">Удалить</a>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'blog/base.html'%}
+{% load static %}
+{% load my_tags %}
+{% block content %}
+
+
+<div class="row text-right">
+    {% for object in object_list %}
+
+    <div class="col-4">
+
+        <div class="card mb-3 box-shadow">
+            <img src="{{ object.preview | media_filter }}" class="card-img-top" alt={{object.preview|media_filter}}>
+
+
+            <div class="card-body">
+                <h5 class="card-title">
+                    <div style="color: blue"><b>{{object.title}}</b></div>
+                </h5>
+                <p class="card-text">
+                    {% if object.content|length >= 100 %}
+                    {{ object.content|slice:":100"}} ...
+                    {% else %}
+                    {{ object.content}}
+                    {% endif %}
+                </p>
+                <div class="btn-group">
+                    <a class="btn btn-link" href="{% url 'blog:view' object.pk%}" role="button">Посмотреть</a>
+
+
+                    <a class="btn btn-info" href="{% url 'blog:edit' object.pk%}"
+                       role="button">Изменить</a>
+
+                    <a class="btn btn-danger" href="{% url 'blog:delete' object.pk%}"
+                       role="button">Удалить</a>
+                </div>
+
+            </div>
+
+    </div>
+
+
+    </div>
+    {% endfor %}
+
+</div>
+</div>
+
+
+{% if is_paginated %}
+
+<div class="col-12">
+    <div class="card mb-3 box-shadow">
+
+        <div class="card-body">
+
+            <div class="btn-group">
+
+
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+
+
+                    <li>
+
+                        <a class="p-2 btn btn-outline-primary"
+                           href="?page={{ page_obj.previous_page_number }}"
+                           role="button"> &laquo; </a> &nbsp;
+
+
+                    </li>
+                    {% else %}
+
+                    <li class="disabled p-2 btn btn-outline-primary" role="button"><span>&laquo;</span></li> &nbsp;
+                    {% endif %}
+
+
+                    {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                    <li class="disabled p-2 btn btn-outline-primary" role="button"><span>{{ i }}(текущая);</span></li>
+                    &nbsp;
+                    {% else %}
+                    <li>
+
+
+                        <a class="p-2 btn btn-outline-primary"
+                           href="?page={{ i }}"
+                           role="button"> {{ i }} </a> &nbsp;
+
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li>
+
+                        <a class="p-2 btn btn-outline-primary"
+                           href="?page={{ page_obj.next_page_number }}"
+                           role="button"> &raquo; </a>
+
+                    </li>
+                    {% else %}
+                    <li class="disabled p-2 btn btn-outline-primary" role="button"><span>&raquo; </span></li> &nbsp;
+                    {% endif %}
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+
+</div>
+
+{% endblock %}

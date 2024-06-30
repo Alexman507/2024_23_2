@@ -1,0 +1,53 @@
+{% extends 'main/base.html'%}
+{% load static %}
+{% load my_tags %}
+{% block content %}
+
+<div class="row text-right">
+
+    <div class="col-12">
+
+        <div class="card mb-3 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Информация о версии</h4>
+            </div>
+
+
+            <div class="card-body">
+                <h5 class="card-title">
+                    <div style="color: orange"><b>{{object | title}}</b></div>
+                </h5>
+                <p class="card-text">
+                    <b>Продукт:</b> &nbsp; {{ object.product }}<br>
+
+
+                    <b>Номер версии:</b> &nbsp; {{ object.number }}<br>
+                    <b>Название версии:</b> &nbsp; {{ object.name }}<br>
+                    <b>Признак актуальности:</b> &nbsp; {{ object.sign }}<br>
+
+
+                </p>
+                <div class="btn-group">
+
+                    <a class="btn btn-primary" href="{% url 'main:product_update' object.pk%}"
+                       role="button">Изменить</a>
+                    <a class="btn btn-primary" href="{% url 'main:product_delete' object.pk%}"
+                       role="button">Удалить</a>
+
+                    <a class="btn btn-primary" href="{% url 'main:versions' %}"
+                       role="button">К списку версий продуктов</a>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+{% endblock %}>

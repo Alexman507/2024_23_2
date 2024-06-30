@@ -1,0 +1,73 @@
+{% extends 'main/base.html'%}
+{% load static %}
+{% load my_tags %}
+{% block content %}
+
+<div class="row text-right">
+    <div class="col-6">
+        <div class="card mb-3 box-shadow">
+
+            <div class="card-body">
+                <img src="{{object.preview |media_filter}}" class="card-img-top" alt={{object.name}}>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-6">
+
+        <div class="card mb-3 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Информация</h4>
+            </div>
+
+
+            <div class="card-body">
+                <h5 class="card-title">
+                    <div style="color: black"><b>{{object | title}}</b></div>
+                </h5>
+                <p class="card-text">
+
+
+                <br>
+                <b>Наименование: </b>{{object.name}}
+                <br> <br>
+                <b>Описание: </b>{{object.description}}
+                <br> <br>
+                <b>Категория: </b>{{object.category}}
+                <br> <br>
+                <b>Цена: </b>{{object.price}}
+                <br><br>
+                <small class="text-body-secondary">
+
+                    Последний привоз: {{object.created_at}}
+                    <br>
+                    Наличие уточнять на складе :))0)
+
+
+                </small>
+
+
+                </p>
+                <div class="btn-group">
+
+                    <a class="btn btn-primary" href="{% url 'main:product_list' %}" role="button"> Вернуться на главную
+                        страницу </a>
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+</div>
+
+{% endblock %}
