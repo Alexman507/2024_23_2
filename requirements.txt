@@ -12,3 +12,5 @@ sqlparse~=0.5.0
 psycopg2~=2.9.9
 colorama~=0.4.6
 requests~=2.31.0
+redis~=5.0.7
+python-dotenv~=1.0.1
