@@ -1,0 +1,39 @@
+{% extends 'main/base.html'%}
+{% load static %}
+{% load my_tags %}
+
+
+
+        {% block content %}
+<div class="row text-center">
+
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Список категорий</h1>
+            </div>
+        </section>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Название</th>
+                <th scope="col">Описание</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in object_list %}
+            <tr>
+                <td>{{ category.name }}</td>
+                <td>
+                    {% if category.description|length >= 100 %}
+                    {{ category.description|slice:":100"}} ...
+                    {% else %}
+                    {{ category.description}}
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+</div>
+    {% endblock %}

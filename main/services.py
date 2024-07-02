@@ -23,7 +23,7 @@ def get_categories_from_cache():
 
 def get_products_from_cache():
     """
-    Получение продуктов из кэша. Если кэш пуст,то получение из БД.
+    Получение продуктов из кэша. Если кэш пуст, то получение из БД.
     """
     if not CACHE_ENABLED:
         return Product.objects.all()

@@ -2,6 +2,10 @@
 {% load static %}
 {% load my_tags %}
 {% block content %}
+<div class="row text-center">
+
+        <a class="p-2 btn btn-outline-primary" href="{% url 'main:category_list' %}">Список категорий</a>
+</div>
 
     <div class="row text-center">
         {% for object in object_list %}
