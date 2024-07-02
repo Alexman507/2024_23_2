@@ -5,7 +5,8 @@ from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from main.forms import ProductForm, VersionForm, VersionFormSet, ProductModeratorForm
-from main.models import Product, Contact, Order, Version
+from main.models import Product, Contact, Order, Version, Category
+from main.services import get_products_from_cache, get_categories_from_cache
 
 
 class GetContextMixin:
@@ -28,6 +29,9 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
 class ProductListView(GetContextMixin, ListView):
     model = Product
+
+    def get_queryset(self):
+        return get_products_from_cache()
 
 
 class ProductDetailView(GetContextMixin, DetailView):
@@ -123,3 +127,10 @@ class VersionUpdateView(UpdateView):
 class VersionDeleteView(DeleteView):
     model = Version
     success_url = reverse_lazy("main:versions")
+
+
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
+
+    def get_queryset(self):
+        return get_categories_from_cache()
